@@ -4,16 +4,17 @@ using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
 
-//Сокет это один конец двустороннего канала связи между двумя программами
-//работающими в сети. Соединяя вместе два сокета можно передавать данные между разными процессами(локальными или удаленными)
+
 namespace SocketServer
 {
     class Server
     {
-        static void Main(string[] args)
+        public static string data = null;
+         static void Main()
         {
-            // Устанавливаем для сокета локальную конечную точку
-            IPHostEntry ipHost = Dns.GetHostEntry("localhost");
+            
+        // Устанавливаем для сокета локальную конечную точку
+        IPHostEntry ipHost = Dns.GetHostEntry("localhost");
             IPAddress ipAddr = ipHost.AddressList[0];
             IPEndPoint ipEndPoint = new IPEndPoint(ipAddr, 11000);
 
@@ -33,7 +34,7 @@ namespace SocketServer
 
                     // Программа приостанавливается, ожидая входящее соединение
                     Socket handler = sListener.Accept();
-                    string data = null;
+                   
 
                     // Мы дождались клиента, пытающегося с нами соединиться
 
@@ -70,10 +71,15 @@ namespace SocketServer
             }
         }
 
-        static public string Time(string input)
+        public static string Time(string input)
         {
-            string result = ("ds");
-  
+            string[] info = { "Челябинск", "Москва" };
+            string result= null;
+            if (data == info[0])
+            {
+                result = String.Format("21:00");
+            }
+
             return result;
         }
     }
